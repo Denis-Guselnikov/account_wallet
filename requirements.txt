@@ -1,3 +1,4 @@
 python==3.7.9
 django==3.0.7
 psycopg2==2.7.7
+validate_email==1.3
