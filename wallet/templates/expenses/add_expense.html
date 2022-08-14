@@ -4,7 +4,7 @@
 
 <div class="container mt-4">
 
-    <nav aria-label="breadcrumb">
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Expenses</a></li>
           <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
@@ -16,7 +16,7 @@
         <form action="{% url 'add-expenses' %}" method="post">
 
         {% include 'partials/messages.html' %}            
-        {% csrf_token %}
+        {% csrf_token %}          
 
         <div class="form-group">
             <label for="">Amount</label>

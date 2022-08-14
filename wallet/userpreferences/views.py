@@ -2,7 +2,6 @@ from django.shortcuts import render
 import os
 import json
 from django.conf import settings
-# from .models import UserePreferences
 from userpreferences.models import UserePreferences
 from django.contrib import messages
 
@@ -25,8 +24,8 @@ def index(request):
     if exists:
         user_preferences = UserePreferences.objects.get(user=request.user)
 
-    if request.method=='GET':         
-        return render(request, 'preferences/index.html', {'currencies': currency_data, 'user_preferences': user_preferences})
+    if request.method=='GET':
+        return render(request, 'preferences/index.html', {'currencies': currency_data, 'user_preferences': user_preferences})        
 
     else:
         currency = request.POST['currency']

@@ -6,16 +6,13 @@
 
 <div class="row">
     <div class="col-md-10">
-        <nav aria-label="breadcrumb">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Expenses</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Edit Expense</li>
+              <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Расходы</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Мои Расходы</li>
             </ol>
         </nav>        
-    </div>
-    <div class="col-md-2">
-        <a href="{% url 'expense-delete' expense.id %}" class="btn btn-danger btn-sm">Delete</a>
-    </div>
+    </div>    
 </div>
   <p></p>    
 
@@ -51,7 +48,7 @@
             <input type="date" class="form-control form-control-sm" name="expense_date" value="{{values.pub_date |date:'Y-m-d' }}">    
         </div>
         <p></p>
-        <input type="submit" value="Save" class="btn btn-primary btn-primary-sm">
+        <input type="submit" value="Сохранить" class="btn btn-primary btn-primary-sm">
         </form>
 
       </div>
