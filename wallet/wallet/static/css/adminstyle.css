@@ -1,0 +1,27 @@
+#header {   
+    background: rgb(56, 109, 49);
+    color:#ffffff;   
+}
+
+#branding h1 {
+    color:#ffffff;
+}
+
+div.breadcrumbs {
+    background: #368333;
+    padding: 10px 40px;
+    border: none;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: left;
+}
+  
+  input[type="submit"],
+  input[type="button"],
+  .submit-row input {    
+    background: rgb(56, 109, 49);
+  }
+
+.module h2, .module caption, .inline-group h2 {
+    background: rgb(56, 109, 49);
+}

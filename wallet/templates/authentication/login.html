@@ -29,11 +29,18 @@
               </div>               
               <input type="submit" value="Login" class="btn btn-block btn-primary submit-btn" />                
             </form>
-          </div>
-      </div>
+
+            <div class="container">
+              <span class="text-lead lead">У Вас нет учётной запеси?</span><a href="{% url 'register' %}">Зарегестрироваться</a><br>
+              <span class="text-lead lead">Если забыли пороль?</span><a href="{% url 'request-password' %}">Сбросить пароль</a>
+            </div>
+
+          </div>         
+
+      </div> 
   </div>
   <div class="col-md-4"></div>
-</div>
+</div> 
 
 <script src="{% static 'js/register.js' %}"></script>
 

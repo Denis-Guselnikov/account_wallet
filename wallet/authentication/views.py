@@ -61,21 +61,26 @@ class RegistrationView(View):
                 user.set_password(password)
                 user.is_active = False                
                 user.save()
+                current_site = get_current_site(request)
+                email_body = {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
+                }
 
-                uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
-
-
-                domain = get_current_site(request).domain
-                link = reverse('activate', kwargs={'uidb64':uidb64, 'token': account_activation_token.make_token(user)})
-                activate_url = 'http://'+domain +link              
+                link = reverse('activate', kwargs={
+                               'uidb64': email_body['uid'], 'token': email_body['token']})
 
                 email_subject = 'Activate your account'
-                email_body = 'Привет ' + user.username + 'Пожалуйста, используйте эту ссылку для потверждения почты!\n' + activate_url
-                email = EmailMessage(                    
+
+                activate_url = 'http://'+current_site.domain+link
+
+                email = EmailMessage(
                     email_subject,
-                    email_body,
+                    'Hi '+user.username + ', Please the link below to activate your account \n'+activate_url,
                     'testsend152@gmail.com',
-                    [email],                    
+                    [email],
                 )
                 email.send(fail_silently=True)
                 messages.success(request, "Аккаунт успешно создан!")
@@ -136,3 +141,44 @@ class LogoutView(View):
         auth.logout(request)
         messages.success(request, 'Ты вышел из системы')
         return redirect('login')
+
+
+class RequestPasswordResetEmail(View):
+    def get(self, request):        
+        return render(request, 'authentication/reset-password.html')
+
+    def post(self, request):
+        email = request.POST['email'] 
+
+        context = {
+            'values': request.POST
+        } 
+
+        if not validate_email(email):
+            messages.error(request, 'Пожалуйста, укажите действительный адрес электронной почты')
+            return render(request, 'authentication/reset-password.html', context) 
+
+        current_site = get_current_site(request)
+
+        user = request.objects.filter
+        email_body = {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': account_activation_token.make_token(user),
+        }
+
+        link = reverse('activate', kwargs={
+                       'uidb64': email_body['uid'], 'token': email_body['token']})
+
+        email_subject = 'Activate your account'
+
+        activate_url = 'http://'+current_site.domain+link
+
+        email = EmailMessage(
+            email_subject,
+            'Hi '+user.username + ', Please the link below to activate your account \n'+activate_url,
+            'testsend152@gmail.com',
+            [email],
+        )
+        email.send(fail_silently=False)
