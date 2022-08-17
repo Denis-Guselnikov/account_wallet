@@ -6,8 +6,8 @@
 
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'income' %}">Income</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add Income</li>
+          <li class="breadcrumb-item"><a href="{% url 'income' %}">Доход</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Добавить Доход</li>
         </ol>
     </nav>
 
@@ -19,17 +19,17 @@
         {% csrf_token %}
 
         <div class="form-group">
-            <label for="">Amount</label>
+            <label for="">СУММА</label>
             <input type="number" class="form-control form-control-sm" name="amount" value="{{values.amount}}">    
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Description</label>
+            <label for="">ОПИСАНИЕ</label>
             <input type="text" class="form-control form-control-sm" name="description" value="{{values.description}}">    
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Source</label>
+            <label for="">ИСТОЧНИК</label>
             <select class="form-control" name="source">    
             {% for source in sources %} 
             <option name="source" value="{{source.name}}">{{source.name}}</option>
@@ -38,7 +38,7 @@
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Date of Income</label>
+            <label for="">ДАТА ПОЛУЧЕНИЯ ДОХОДА</label>
             <input type="date" class="form-control form-control-sm" name="income_date">    
         </div>
         <p></p>

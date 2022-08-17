@@ -1,12 +1,11 @@
-const renderChat = (data, labels) => {
-
+const renderChat2 = (data, labels) => {
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-    type: 'doughnut', 
+    type: 'doughnut',
     data: {
         labels: labels,
         datasets: [{
-            label: 'Last 6 months expenses',
+            label: 'Доходы за последние 6 месяцев',
             data: data,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -25,36 +24,34 @@ const renderChat = (data, labels) => {
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1
-          }, 
-        ],
+        }]
     },
     options: {
-        title:{
-            display:true, 
-            text: "Расходы по категориям",           
-        },        
-    },           
-  });
+        title: {
+            display:true,
+            text: 'Источники Дохода',          
+        },         
+    },
+});
 };
 
-const getChartData = () => {
+const getChartData2 = () => {
     console.log("fetching");
-    fetch('/expense_category_summary')
+    fetch('income_category_summary')
       .then((res) => res.json())
       .then((results) => {
         console.log("results", results);
-        const category_date = results.expense_category_date;
+        const category_data = results.income_category_date;
         const [labels, data] = [
-            Object.keys(category_date),
-            Object.values(category_date),
+          Object.keys(category_data),
+          Object.values(category_data),
         ];
-
-        renderChat(data, labels);
-
+  
+        renderChat2(data, labels);
       });
-};
+  };
 
 
+document.onload = getChartData2();
 
 
-document.onload = getChartData();

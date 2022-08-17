@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '5sen-+d)uhfm9(=-gi19lvgg!m-_!(1+^7!*cxb#g62jlmbk1)'
+SECRET_KEY = os.getenv('KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -32,9 +32,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'expenses.apps.ExpensesConfig',
-    'userpreferences.apps.UserpreferencesConfig',
+    'users.apps.UsersConfig',
+    'expenses.apps.ExpensesConfig',    
     'userincome.apps.UserincomeConfig',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -73,13 +74,8 @@ WSGI_APPLICATION = 'wallet.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('dbname'),        
-        'USER': os.getenv('dbuser'),
-        'PASSWORD': os.getenv('dbpassword'),
-        'HOST': os.getenv('dbhost')
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),       
     }
 }
 
@@ -106,7 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -128,10 +124,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-# email stuff
-EMAIL_HOST = os.getenv('EMAIL_HOST')       
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  
-EMAIL_USE_TLS = True                             
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
-EMAIL_PORT = 25
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'expenses'
+LOGOUT_REDIRECT_URL = 'login' 

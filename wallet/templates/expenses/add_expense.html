@@ -6,8 +6,8 @@
 
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Expenses</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+          <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Расходы</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Добавить Расходы</li>
         </ol>
     </nav>
 
@@ -19,17 +19,17 @@
         {% csrf_token %}          
 
         <div class="form-group">
-            <label for="">Amount</label>
+            <label for="">СУММА</label>
             <input type="number" class="form-control form-control-sm" name="amount" value="{{values.amount}}">    
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Description</label>
+            <label for="">ОПИСАНИЕ</label>
             <input type="text" class="form-control form-control-sm" name="description" value="{{values.description}}">    
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Category</label>
+            <label for="">КАТЕГОРИЯ</label>
             <select class="form-control" name="category">    
             {% for category in categories %} 
             <option name="category" value="{{category.name}}">{{category.name}}</option>
@@ -38,7 +38,7 @@
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Date of Expense</label>
+            <label for="">ДАТА РАСХОДА</label>
             <input type="date" class="form-control form-control-sm" name="expense_date">    
         </div>
         <p></p>

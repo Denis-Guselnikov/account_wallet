@@ -24,17 +24,17 @@
         {% csrf_token %}
 
         <div class="form-group">
-            <label for="">Amount</label>
+            <label for="">СУММА</label>
             <input type="number" class="form-control form-control-sm" name="amount" value="{{values.amount}}">    
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Description</label>
+            <label for="">ОПИСАНИЕ</label>
             <input type="text" class="form-control form-control-sm" name="description" value="{{values.description}}">    
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Category</label>
+            <label for="">КАТЕГОРИЯ</label>
             <select class="form-control" name="category">
             <option selected name="category" value="{{values.category}}">{{values.category}}</option>        
             {% for category in categories %} 
@@ -44,7 +44,7 @@
         </div>
         <p></p>
         <div class="form-group">
-            <label for="">Date of Expense</label>
+            <label for="">ДАТА РАСХОДА</label>
             <input type="date" class="form-control form-control-sm" name="expense_date" value="{{values.pub_date |date:'Y-m-d' }}">    
         </div>
         <p></p>

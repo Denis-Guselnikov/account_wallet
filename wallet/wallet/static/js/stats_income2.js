@@ -1,12 +1,12 @@
-const renderChat = (data, labels) => {
+const renderChat3 = (data, labels) => {
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('myChartt').getContext('2d');
     var myChart = new Chart(ctx, {
-    type: 'doughnut', 
+    type: 'polarArea', 
     data: {
         labels: labels,
         datasets: [{
-            label: 'Last 6 months expenses',
+            label: 'Доходы за последние 6 месяцев',
             data: data,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -29,32 +29,31 @@ const renderChat = (data, labels) => {
         ],
     },
     options: {
-        title:{
-            display:true, 
-            text: "Расходы по категориям",           
-        },        
-    },           
-  });
+        title: {
+            display:true,
+            text: 'Доходы за последние 6 месяцев',          
+        },         
+    },
+    
+});
 };
 
-const getChartData = () => {
+const getChartData3 = () => {
     console.log("fetching");
-    fetch('/expense_category_summary')
+    fetch('income_category_summary')
       .then((res) => res.json())
       .then((results) => {
         console.log("results", results);
-        const category_date = results.expense_category_date;
+        const category_date = results.income_category_date;
         const [labels, data] = [
             Object.keys(category_date),
             Object.values(category_date),
         ];
 
-        renderChat(data, labels);
+        renderChat3(data, labels);
 
       });
 };
 
 
-
-
-document.onload = getChartData();
+document.onload = getChartData3();

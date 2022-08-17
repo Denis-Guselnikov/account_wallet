@@ -37,10 +37,10 @@
       <table class="table table-striped">
         <thead class="table-dark">
           <tr>
-            <th>Amount ({{currency}})</th>
-            <th>Catergory</th>
-            <th>Description</th>
-            <th>Date</th>
+            <th>СУММА</th>
+            <th>КАТЕГОРИЯ</th>
+            <th>ОПИСАНИЕ</th>
+            <th>ДАТА</th>
             <th></th>
           </tr>
         </thead>
@@ -54,7 +54,7 @@
             <td>{{expense.pub_date}}</td>            
             <td>
               <a href="{% url 'expense-edit' expense.id %}" class="btn btn-outline-success btn-sm">Edit</a>
-              <a href="{% url 'expense-delete' expense.id %}" class="btn btn-outline-danger btn-sm">X</a>            
+              <a href="{% url 'expense-delete' expense.id %}" class="btn btn-outline-danger btn-sm">X</a> 
             </td>                        
           </tr>
           {% endfor %}
@@ -63,17 +63,17 @@
 
     </div>
 
-    <p class="no-results" style="display: none;">No results </p>
+    <p class="no-results" style="display: none;">Нет результатов</p>
 
     <div class="table-output">
 
-      <table class="table table-stripped table-hover">
-        <thead>
+      <table class="table table-striped">
+        <thead class="table-dark">
           <tr>
-            <th>Amount ({{currency}})</th>
-            <th>Catergory</th>
-            <th>Description</th>
-            <th>Date</th>
+            <th>СУММА</th>
+            <th>КАТЕГОРИЯ</th>
+            <th>ОПИСАНИЕ</th>
+            <th>ДАТА</th>
             <th></th>
           </tr>
         </thead>
@@ -100,15 +100,25 @@
       {% if page_obj.has_next %}
         <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующий</a></li>
         <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
-      {% endif %}
-  
-  
+      {% endif %}  
     </ul>
       {% endif %}
-    </div>
-  
+    </div>  
 </div>
 
+<div class="row">
+  <div class="col-md-6">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+  <div class="col-md-6">
+   <canvas id="myChartt" width="400" height="400"></canvas>
+  </div>
+ </div>
+ 
+<script src="{% static 'js/stats.js' %}"></script> 
+<script src="{% static 'js/stats2.js' %}"></script>
 <script src="{% static 'js/searchExpenses.js' %}"></script>
+ 
+
 
 {% endblock %}

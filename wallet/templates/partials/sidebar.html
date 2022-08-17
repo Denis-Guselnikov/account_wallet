@@ -37,7 +37,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{% url 'stats_income' %}">
             <img src="{% static 'img/stats.png' %}" weight="20" height="20">            
             Информация О Даходах
           </a>
@@ -50,21 +50,6 @@
         <a class="link-secondary" href="#" aria-label="Add a new report">
           <span data-feather="plus-circle" class="align-text-bottom"></span>
         </a>
-      </h6>
-      <ul class="nav flex-column mb-2">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'preferences' %}"> 
-            <img src="{% static 'img/setting.png' %}" weight="20" height="20">           
-            Валюты
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"> 
-            <img src="{% static 'img/setting.png' %}" weight="20" height="20">           
-            Аккаунт
-          </a>
-        </li>
-        
-      </ul>
+      </h6>      
     </div>
   </nav> 

@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
-from userpreferences.models import UserePreferences
 import datetime
 
 
@@ -26,19 +25,16 @@ def search_expenses(request):
 
 
 
-
-@login_required(login_url='/authentication/login')
+@login_required(login_url='/auth/login/')
 def index(request):
     categories = Category.objects.all()
     expenses = Expense.objects.filter(owner=request.user)
     paginator = Paginator(expenses, 5)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    currency = UserePreferences.objects.get(user=request.user).currency    
+    page_obj = paginator.get_page(page_number)     
     context = {
         'expenses': expenses,
-        'page_obj': page_obj,
-        'currency': currency
+        'page_obj': page_obj,               
     }
     return render(request, 'expenses/index.html', context)
 
@@ -56,7 +52,7 @@ def add_expense(request):
         amount = request.POST['amount']
 
         if not amount:
-            messages.error(request, 'Amount is required')
+            messages.error(request, 'Сумма обязательна!')
             return render(request, 'expenses/add_expense.html', context)
 
         description = request.POST['description']
@@ -64,16 +60,16 @@ def add_expense(request):
         category = request.POST['category']
 
         if not description:
-            messages.error(request, 'Description is required')
+            messages.error(request, 'Описание обязательно!')
             return render(request, 'expenses/add_expense.html', context)
         
         Expense.objects.create(owner=request.user, pub_date=pub_date, amount=amount,
                                category=category, description=description)       
-        messages.success(request, 'Expense saved successfully!')
+        messages.success(request, 'Расходы успешно сохранены!')
         return redirect('expenses')
 
 
-@login_required(login_url='/authentication/login')
+@login_required(login_url='/auth/login/')
 def expense_edit(request, id):
     expense = Expense.objects.get(pk=id)
     categories = Category.objects.all()
@@ -85,18 +81,18 @@ def expense_edit(request, id):
     if request.method=='GET':        
         return render(request, 'expenses/edit-expense.html', context)
     if request.method=='POST':
+        
         amount = request.POST['amount']
-
-        if not amount:
-            messages.error(request, 'Amount is required')
-            return render(request, 'expenses/edit-expense.html', context)
-
         description = request.POST['description']
         pub_date = request.POST['expense_date']
         category = request.POST['category']
 
+        if not amount:
+            messages.error(request, 'Сумма обязательна!')
+            return render(request, 'expenses/edit-expense.html', context)
+
         if not description:
-            messages.error(request, 'Description is required')
+            messages.error(request, 'Описание обязательно!')
             return render(request, 'expenses/edit-expense.html', context)
 
         expense.owner = request.user
@@ -106,7 +102,7 @@ def expense_edit(request, id):
         expense.description = description            
               
         expense.save()      
-        messages.success(request, 'Expense updated successfully!')
+        messages.success(request, 'Расходы успешно обновлены!')
 
         return redirect('expenses')   
 
@@ -114,7 +110,7 @@ def expense_edit(request, id):
 def delete_expense(request, id):
     expense = Expense.objects.get(pk=id)
     expense.delete()
-    messages.success(request, 'Expense removed')
+    messages.success(request, 'Расход удалён!')
 
     return redirect('expenses') 
 

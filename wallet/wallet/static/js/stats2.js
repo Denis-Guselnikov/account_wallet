@@ -1,12 +1,12 @@
-const renderChat = (data, labels) => {
+const renderChat2 = (data, labels) => {
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('myChartt').getContext('2d');
     var myChart = new Chart(ctx, {
-    type: 'doughnut', 
+    type: 'line', 
     data: {
         labels: labels,
         datasets: [{
-            label: 'Last 6 months expenses',
+            label: 'Расходы за 6 месяцев',
             data: data,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -28,16 +28,11 @@ const renderChat = (data, labels) => {
           }, 
         ],
     },
-    options: {
-        title:{
-            display:true, 
-            text: "Расходы по категориям",           
-        },        
-    },           
-  });
+    
+});
 };
 
-const getChartData = () => {
+const getChartData2 = () => {
     console.log("fetching");
     fetch('/expense_category_summary')
       .then((res) => res.json())
@@ -49,12 +44,10 @@ const getChartData = () => {
             Object.values(category_date),
         ];
 
-        renderChat(data, labels);
+        renderChat2(data, labels);
 
       });
 };
 
 
-
-
-document.onload = getChartData();
+document.onload = getChartData2();

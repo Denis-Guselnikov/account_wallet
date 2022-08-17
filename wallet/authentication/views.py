@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.urls import reverse
 from .utils import account_activation_token
-from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
+from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import auth
@@ -87,7 +87,7 @@ class RegistrationView(View):
                 return render(request, 'authentication/register.html')
 
 
-        return render(request, 'authentication/register.html')
+        return render(request, 'authentication/register.html')               
 
 class VerificationView(View):
     def get(self, request, uidb64, token):
