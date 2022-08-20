@@ -17,24 +17,37 @@
           </li>
         </ol>
       </nav>
-    </div>
-
-    <div class="col-md-2">
-      <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Обновить</a> 
-    </div>
+    </div>    
     
  <div class="row">
-   <div class="col-md-6">
+   <div class="col-md-5">
      <canvas id="myChart" width="400" height="400"></canvas>
    </div>
+
    <div class="col-md-6">
+
+    <div class="section-todo-list">
+        
+        <h2><i class="fa fa-tasks" aria-hidden="true"></i> Заметки</h2>
+        <div class="input-btn">
+            <input type="text">
+            <button onclick="addTasks()">Добавить запись</button>
+        </div>
+        <div class="list-tasks">
+            <ul>
+                <li>name of task more content <span>X</span></li>
+                <li>name of task more content <span>X</span></li>
+                <li>name of task more content <span>X</span></li>
+                <li>name of task more content <span>X</span></li>
+            </ul>
+        </div>
+        <button class="remove-all" onclick="deleteAll()">Удалить Заметки</button>
+    </div>
 
    </div>
  </div>
 </div>
 
+<script src="{% static 'js/script.js' %}"></script>
 <script src="{% static 'js/stats.js' %}"></script>
-
-</script>
-
 {% endblock content %}
